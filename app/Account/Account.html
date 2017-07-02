@@ -1,0 +1,51 @@
+<style>
+    .ng-dirty.ng-invalid {
+        border-color: #FA787E;
+    }
+
+    .ng-dirty.ng-valid {
+        border-color: #78FA89;
+    }
+
+</style>
+
+<form name="vm.accountForm" novalidate>
+    <div class="form-group">
+        <label>Имя</label>
+        <input class="form-control" ng-model="vm.account.name" type="text" placeholder="Имя" required ng-minlength="3" name="accountName">
+    </div>
+
+    <div ng-messages="vm.accountForm.accountName.$error" ng-if="vm.accountForm.accountName.$dirty">
+
+        <div ng-message="required" class="alert alert-danger" role="alert">Не введено значение</div>
+        <div ng-message="minlength" class="alert alert-danger" role="alert">Значение не должно быть не менее 3 символов</div>
+
+    </div>
+
+    <div class="form-group">
+        <label>email</label>
+        <input class="form-control" ng-model="vm.account.email" type="email" placeholder="email" required name="accountEmail">
+    </div>
+
+    <div role="alert" ng-messages="vm.accountForm.accountEmail.$error" ng-if="vm.accountForm.accountEmail.$dirty">
+        <div ng-message="required" class="alert alert-danger">Не введено значение</div>
+        <div ng-message="email" class="alert alert-danger">Неправильный формат email</div>
+    </div>
+
+    <div class="form-group">
+        <label>Телефон</label>
+        <input class="form-control" ng-model="vm.account.phone" type="text" placeholder="Телефон" data-ng-pattern="/^\+\d{3}-\d{2}-\d{2}$/" name="accountPhone">
+    </div>
+
+    <div role="alert" ng-messages="vm.accountForm.accountPhone.$error" ng-if="vm.accountForm.accountPhone.$dirty">
+        <div ng-message="pattern" class="alert alert-danger">Введите телефон в формате +xxx-xx-xx</div>
+    </div>
+
+
+    <button type="submit" class="btn btn-default" data-ng-click="vm.addAccountData()" data-ng-disabled="vm.accountForm.$invalid">Добавить
+    </button>
+
+   <!--- <pre>pokemonForm.pokemonName.$error = {{ vm.pokemonForm.pokemonName.$error | json }}</pre>
+    <pre>pokemonForm.pokemonWeight.$error = {{ vm.pokemonForm.pokemonWeight.$error | json }}</pre>
+---->
+</form>
